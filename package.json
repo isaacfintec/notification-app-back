@@ -7,7 +7,8 @@
     "lint": "tslint -p tsconfig.json",
     "clean": "rimraf ./lib",
     "format": "prettier --write \"src/**/*.ts\"",
-    "test": "env NODE_ENV=test nodemon --watch . --ext ts --exec \"mocha -r ts-node/register src/**/*.spec.ts\"",
+    "test:dev": "env NODE_ENV=test nodemon --watch . --ext ts --exec \"mocha -r ts-node/register src/**/*.spec.ts\"",
+    "test": "env NODE_ENV=test mocha -r ts-node/register src/**/*.spec.ts",
     "transpile": "tsc --project ./",
     "preversion": "npm-run-all format test lint",
     "build": "npm-run-all clean transpile",
@@ -53,6 +54,7 @@
     "express-validator": "7.0.1",
     "helmet": "7.0.0",
     "http-status-codes": "2.2.0",
+    "mongo-sanitize": "1.1.0",
     "mongoose": "7.3.3",
     "morgan": "1.10.0"
   },
