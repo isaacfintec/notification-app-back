@@ -5,6 +5,7 @@ import SQLDB from '../../../../../core/sqldb';
 
 import Repository from '../Notification';
 import { NotificationModel } from '../../model/Model';
+import { PartialSearchQuery } from '../../../application/interfaces';
 
 describe('@Notifications/domain/repositories', () => {
   const mongodb = new MongoDB();
@@ -41,7 +42,7 @@ describe('@Notifications/domain/repositories', () => {
     expect(notification.type).to.be.equal(notificationDTO.type);
     expect(notification.category).to.be.equal(notificationDTO.category);
     expect(notification.username).to.be.equal(notificationDTO.username);
-    expect(notification.time.toISOString()).to.be.equal(notificationDTO.time);
+    expect(notification.time).to.be.equal(notificationDTO.time);
     expect(notification.message).to.be.equal(notificationDTO.message);
   });
 
@@ -60,15 +61,16 @@ describe('@Notifications/domain/repositories', () => {
     expect(target.type).to.be.equal(notificationDTO.type);
     expect(target.category).to.be.equal(notificationDTO.category);
     expect(target.username).to.be.equal(notificationDTO.username);
-    expect(target.time.toISOString()).to.be.equal(notificationDTO.time);
+    expect(target.time).to.be.equal(notificationDTO.time);
     expect(target.message).to.be.equal(notificationDTO.message);
   });
 
   it('@NotificationRepo:Search:Mongo: should search a notifications from mongodb', async () => {
     const repository = new Repository();
     const query = {
-      username: notificationDTO.username,
-    };
+      category: notificationDTO.category,
+    } as PartialSearchQuery;
+
     const notifications = await repository.search(query);
     notifications.map((n) => {
       const notification = n as NotificationModel;
@@ -87,8 +89,9 @@ describe('@Notifications/domain/repositories', () => {
   it('@NotificationRepo:Search:SQL: should search all notifications from sqlitedb', async () => {
     const repository = new Repository('SQL');
     const query = {
-      username: notificationDTO.username,
-    };
+      category: notificationDTO.category,
+    } as PartialSearchQuery;
+
     const notifications = await repository.search(query);
     notifications.map((n) => {
       const notification = n as NotificationModel;
@@ -107,13 +110,18 @@ describe('@Notifications/domain/repositories', () => {
   it('@NotificationRepo:Search:Error: should get a empty result', async () => {
     let repository = new Repository('SQL');
     const query = {
-      username: 'Isaac',
+      category: 'Politica',
     };
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const notificationsFromSQL = await repository.search(query);
     expect(Array.isArray(notificationsFromSQL)).to.be.true;
     expect(notificationsFromSQL.length).to.be.equal(0);
 
     repository = new Repository();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const notificationsFromMongo = await repository.search(query);
     expect(Array.isArray(notificationsFromMongo)).to.be.true;
     expect(notificationsFromMongo.length).to.be.equal(0);

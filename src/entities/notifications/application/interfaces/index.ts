@@ -1,8 +1,8 @@
-import { TNotifications } from '../../../../core/interfaces';
+import { TCategories, TNotifications } from '../../../../core/interfaces';
 
 export interface SearchQuery {
   type: TNotifications;
-  username: string;
+  category: TCategories;
 }
 
 export type PartialSearchQuery = Partial<SearchQuery>;

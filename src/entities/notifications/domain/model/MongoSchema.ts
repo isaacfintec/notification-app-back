@@ -19,7 +19,7 @@ const schema = new Schema(
     },
     message: SchemaTypes.String,
     username: SchemaTypes.String,
-    time: SchemaTypes.Date,
+    time: SchemaTypes.String,
   },
   { timestamps: true },
 );

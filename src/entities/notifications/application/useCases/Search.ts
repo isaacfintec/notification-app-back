@@ -1,14 +1,14 @@
 import { NotificationModel } from '../../domain/model/Model';
-import { SearchQuery } from '../interfaces';
+import { PartialSearchQuery } from '../interfaces';
 import Repository from '../../domain/repositories/Notification';
 
 export default class SearchNotificationUseCase {
-  search(query: SearchQuery): Promise<NotificationModel[]> | never {
+  search(query: PartialSearchQuery): Promise<NotificationModel[]> | never {
     const repository = new Repository();
     return repository.search(query);
   }
 
-  async exec(query: SearchQuery): Promise<NotificationModel[]> | never {
+  async exec(query: PartialSearchQuery): Promise<NotificationModel[]> | never {
     const self = this;
     const notifications = await self.search(query);
     /**

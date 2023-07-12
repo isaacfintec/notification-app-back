@@ -15,9 +15,13 @@ export interface NotificationLog extends NotificationProps {
   time: Date;
 }
 
-export interface NotificationDTO {
+export interface NotificationMss {
   category: string;
   message: string;
+}
+
+export interface NotificationDTO extends NotificationMss {
   username: string;
   type: string;
+  time: string;
 }

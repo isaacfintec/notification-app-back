@@ -15,11 +15,11 @@ export default class CreateNotificationUseCase {
     notificationDTO: NotificationDTO,
   ): Promise<NotificationModel> | never {
     const self = this;
-    const norificationLog = await self.create(notificationDTO);
+    const norificationLogs = await self.create(notificationDTO);
     /**
      * TODO: call webhook when notificationLog has been saved
      * await self.execWebhook(norifications)
      */
-    return norificationLog;
+    return norificationLogs;
   }
 }

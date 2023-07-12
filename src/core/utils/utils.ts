@@ -19,3 +19,9 @@ export const createArrayOfMockData = <T = unknown>(
 ): T[] => {
   return Array(salt).fill(null).map(set);
 };
+
+export const includes =
+  <T = string>(myArray: T[]) =>
+  (target: T): boolean => {
+    return myArray.includes(target);
+  };

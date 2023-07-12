@@ -9,7 +9,7 @@ import {
 } from '../transporters';
 
 export default class NotificationFactory {
-  createTransporter(notificationDTO: NotificationDTO): BaseTrasporter {
+  static createTransporter(notificationDTO: NotificationDTO): BaseTrasporter {
     const { type } = notificationDTO;
 
     const transporteByType = {
