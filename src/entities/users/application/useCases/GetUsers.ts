@@ -2,11 +2,11 @@ import lodash from 'lodash';
 
 import { QueryForUsers } from '../interface';
 import { IUser } from '../../domain/model/interface';
-import users from '../../domain/repository';
+import usersMock from '../../domain/repositories';
 
 export default class GetUsers {
   getUsers(query: QueryForUsers) {
-    const usersMatch = lodash.filter(users, (user: IUser) => {
+    const usersMatch = lodash.filter(usersMock, (user: IUser) => {
       return user.subscribed.includes(query.subscription);
     });
     return usersMatch;
