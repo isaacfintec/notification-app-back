@@ -9,7 +9,7 @@ import { NotificationModel } from '../../domain/model/Model';
 chai.use(chaiHttp);
 const should = chai.should();
 
-describe.only('@Notification/API', () => {
+describe('@Notification/API', () => {
   const mongodb = new MongoDB();
   const message = {
     category: CATEGORIES.Movies,
