@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize';
 
 import Notificationslogs from '../entities/notifications/domain/model/SQLSchema';
 
-const sequelize = new Sequelize('sqlite::memory:');
+const sequelize = new Sequelize('sqlite::memory:', { logging: false });
 
 class SQL {
   async connect() {

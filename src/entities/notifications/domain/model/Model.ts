@@ -6,7 +6,7 @@ export class NotificationMongoModel extends Document {
   category: string;
   message: string;
   username: string;
-  time: Date;
+  time: string;
 }
 
 export interface NotificationSQLModel extends Model {
@@ -15,7 +15,7 @@ export interface NotificationSQLModel extends Model {
   category: string;
   message: string;
   username: string;
-  time: Date;
+  time: string;
 }
 
 export type NotificationModel = NotificationMongoModel | NotificationSQLModel;

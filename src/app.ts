@@ -4,13 +4,19 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import './core/config';
 import helmet from 'helmet';
+import DB from './core/mongodb';
 
-import { isProductionEnvironment } from './core/utils';
+import { isProductionEnvironment, isTestEnvironment } from './core/utils';
 import appErrorshandler from './core/appErrorsHandler';
 import routes from './routes';
 
 const app = express();
 const logType = isProductionEnvironment() ? 'combined' : 'dev';
+
+if (!isTestEnvironment()) {
+  const db = new DB();
+  db.connect();
+}
 
 app.use(logger(logType));
 app.use(helmet());

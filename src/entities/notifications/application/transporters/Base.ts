@@ -1,6 +1,6 @@
 import { NotificationDTO } from '../../../../core/interfaces';
 import { NotificationModel } from '../../domain/model/Model';
-import CreateNotificationUseCase from '../useCases/Create';
+import CreateNotificationUseCase from '../useCases/CreateOne';
 
 export default abstract class BaseTrasporter {
   props: NotificationDTO;

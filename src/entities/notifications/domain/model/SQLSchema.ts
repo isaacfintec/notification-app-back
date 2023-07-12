@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes, ModelDefined, Optional } from 'sequelize';
 import { NotificationSQLModel } from './Model';
 
-const sequelize = new Sequelize('sqlite::memory:');
+const sequelize = new Sequelize('sqlite::memory:', { logging: false });
 
 export type NotificationCreateSQLModel = Optional<NotificationSQLModel, 'id'>;
 
@@ -22,7 +22,7 @@ const NotificationsLogs: SQLModel = sequelize.define(
     category: DataTypes.STRING,
     message: DataTypes.STRING,
     username: DataTypes.STRING,
-    time: DataTypes.DATE,
+    time: DataTypes.STRING,
   },
   { timestamps: true },
 );
