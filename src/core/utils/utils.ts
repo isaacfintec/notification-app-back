@@ -1,14 +1,21 @@
+const { ENV, NODE_ENV } = process.env;
+const ENVIRONMENT = ENV || NODE_ENV;
+
 export const isProductionEnvironment = (): boolean => {
-  const { ENV } = process.env;
-  return ENV === 'production';
+  return ENVIRONMENT === 'production';
 };
 
 export const isDevelopmentEnvironment = (): boolean => {
-  const { ENV } = process.env;
-  return ENV === 'development';
+  return ENVIRONMENT === 'development';
 };
 
 export const isTestEnvironment = (): boolean => {
-  const { NODE_ENV } = process.env;
-  return NODE_ENV === 'test';
+  return ENVIRONMENT === 'test';
+};
+
+export const createArrayOfMockData = <T = unknown>(
+  salt: number,
+  set: (prop: null) => T,
+): T[] => {
+  return Array(salt).fill(null).map(set);
 };

@@ -2,7 +2,7 @@ import http from 'http';
 import debug from 'debug';
 
 import app from './app';
-import { Address } from './core/interfaces/indext';
+import { Address } from './core/interfaces';
 
 debug('adminWallet:server');
 
