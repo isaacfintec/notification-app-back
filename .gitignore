@@ -118,3 +118,6 @@ yarn.lock
 # VsCode
 .vscode/*
 .vscode/
+
+# Ignore builds
+lib
