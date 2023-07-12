@@ -2,11 +2,11 @@ import http from 'http';
 import debug from 'debug';
 
 import app from './app';
-import { Address } from '@core/interfaces/indext';
+import { Address } from './core/interfaces/indext';
 
 debug('adminWallet:server');
 
-const port = normalizePort(process.env.PORT) || 1339;
+const port = normalizePort(process.env.PORT) || 8000;
 app.set('port', port);
 
 const server = http.createServer(app);

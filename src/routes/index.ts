@@ -1,7 +1,7 @@
 import path from 'path';
 import { Router } from 'express';
 import apiRoutes from './api';
-import { cleanReqInputs } from '@core/helpers';
+import { cleanReqInputs } from '../core/helpers';
 
 const router = Router();
 

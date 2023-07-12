@@ -12,7 +12,7 @@
     "transpile": "tsc --project ./",
     "preversion": "npm-run-all format test lint",
     "build": "npm-run-all clean transpile",
-    "start": "node ./lib"
+    "start": "node ./lib/server.js"
   },
   "repository": {
     "type": "git",
