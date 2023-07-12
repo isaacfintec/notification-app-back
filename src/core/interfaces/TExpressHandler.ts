@@ -1,5 +1,4 @@
-import { Response, NextFunction } from 'express';
-import { IRequest } from './Request';
+import { Request, Response, NextFunction } from 'express';
 
 export interface AddressInfo {
   address: string;
@@ -10,7 +9,7 @@ export interface AddressInfo {
 export type Address = AddressInfo | string | null;
 
 export type TExpressHandler = (
-  req: IRequest,
+  req: Request,
   reply: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => void | never;

@@ -5,7 +5,6 @@ import logger from 'morgan';
 import './core/config';
 import helmet from 'helmet';
 
-// import Transporter from './core/helpers/Transporter';
 import { isProductionEnvironment } from '@core/utils';
 import appErrorshandler from '@core/appErrorsHandler';
 import routes from './routes';

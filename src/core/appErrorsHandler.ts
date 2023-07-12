@@ -10,7 +10,7 @@ interface ErrorHandle {
 const getResponse = (
   type: string,
   message: string,
-  status?: number
+  status?: number,
 ): ErrorHandle => ({
   status,
   error: new CustomError(type, message),
@@ -37,7 +37,7 @@ const evalueError = (err: Error): ErrorHandle => {
    */
   const instance = err.constructor.name;
   const type = err.name;
-  const { message, code = 'Error' } = <CustomError>err;
+  const { message, code = 'Error' } = err as CustomError;
 
   const errorResponseHandlers = {
     MongooseError: () => mongooseError(type, message),
@@ -48,7 +48,7 @@ const evalueError = (err: Error): ErrorHandle => {
       getResponse(
         type,
         'Error en servidor',
-        HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR
+        HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
       ),
   };
   const handle =
