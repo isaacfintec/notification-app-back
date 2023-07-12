@@ -11,12 +11,6 @@
     "resolveJsonModule": true,
     "declaration": true,
     "baseUrl": ".",
-    "paths": {
-      "@core/*": ["./src/core/*"],
-      "@core": ["./src/core"],
-      "@entities/*": ["./src/entities/*"],
-      "@entities": ["./src/entities"]
-    }
   },
   "lib": ["es2015"],
   "include": ["src/**/*.ts"],

@@ -5,8 +5,8 @@ import logger from 'morgan';
 import './core/config';
 import helmet from 'helmet';
 
-import { isProductionEnvironment } from '@core/utils';
-import appErrorshandler from '@core/appErrorsHandler';
+import { isProductionEnvironment } from './core/utils';
+import appErrorshandler from './core/appErrorsHandler';
 import routes from './routes';
 
 const app = express();
