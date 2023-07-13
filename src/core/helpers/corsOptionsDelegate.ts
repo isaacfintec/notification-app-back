@@ -1,4 +1,4 @@
-const corsOptionsDelegate = function (req, callback) {
+const corsOptionsDelegate = (req, callback) => {
   interface ICorsOptions {
     origin: boolean;
   }
