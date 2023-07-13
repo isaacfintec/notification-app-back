@@ -4,7 +4,7 @@ import debug from 'debug';
 import app from './app';
 import { Address } from './core/interfaces';
 
-debug('adminWallet:server');
+debug('notification:server');
 
 const port = normalizePort(process.env.PORT) || 8000;
 app.set('port', port);

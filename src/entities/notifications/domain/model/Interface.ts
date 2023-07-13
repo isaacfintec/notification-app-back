@@ -6,5 +6,5 @@ export default interface INotification {
   message: string;
   category: TCategories;
   username: IUser;
-  time: boolean;
+  time: Date;
 }
