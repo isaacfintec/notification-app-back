@@ -22,7 +22,7 @@ const NotificationsLogs: SQLModel = sequelize.define(
     category: DataTypes.STRING,
     message: DataTypes.STRING,
     username: DataTypes.STRING,
-    time: DataTypes.STRING,
+    time: DataTypes.DATE,
   },
   { timestamps: true },
 );

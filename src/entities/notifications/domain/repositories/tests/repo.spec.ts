@@ -14,7 +14,7 @@ describe('@Notifications/domain/repositories', () => {
     type: 'SMS',
     category: 'Sports',
     username: 'Paco',
-    time: new Date().toISOString(),
+    time: new Date(),
     message: 'Real Madrid gana la copa del rey',
   };
 

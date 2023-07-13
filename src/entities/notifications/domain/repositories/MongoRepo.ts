@@ -13,7 +13,9 @@ export default class MongoRepository {
   }
 
   async search(query?: PartialSearchQuery): Promise<NotificationMongoModel[]> {
-    const notification = await MongoSchema.find(query || {}).exec();
+    const notification = await MongoSchema.find(query || {})
+      .sort({ time: -1 })
+      .exec();
     return notification;
   }
 }

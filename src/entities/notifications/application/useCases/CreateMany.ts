@@ -25,6 +25,7 @@ export default class SaveNotificationMss {
         const notificationDTO = {
           type: channel,
           username: user.name,
+          time: new Date(),
           ...notificationMss,
         };
         notifications.push(notificationDTO);

@@ -23,5 +23,5 @@ export interface NotificationMss {
 export interface NotificationDTO extends NotificationMss {
   username: string;
   type: string;
-  time: string;
+  time: Date;
 }

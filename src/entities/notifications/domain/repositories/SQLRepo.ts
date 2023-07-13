@@ -10,7 +10,10 @@ export default class SQLRepository {
   }
 
   async search(query?: PartialSearchQuery): Promise<NotificationSQLModel[]> {
-    const notification = await SQLSchema.findAll({ where: query || {} });
+    const notification = await SQLSchema.findAll({
+      where: query || {},
+      order: [['time', 'DESC']],
+    });
     return notification.map((v) => v.dataValues);
   }
 }
