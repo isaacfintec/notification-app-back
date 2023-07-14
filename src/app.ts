@@ -6,20 +6,14 @@ import './core/config';
 import helmet from 'helmet';
 import cors from 'cors';
 
-import DB from './core/mongodb';
-
 import { isProductionEnvironment, isTestEnvironment } from './core/utils';
 import appErrorshandler from './core/appErrorsHandler';
 import corsOptionsDelegate from './core/helpers/corsOptionsDelegate';
 import routes from './routes';
+import './core/db';
 
 const app = express();
 const logType = isProductionEnvironment() ? 'combined' : 'dev';
-
-if (!isTestEnvironment()) {
-  const db = new DB();
-  db.connect();
-}
 
 app.use(logger(logType));
 app.use(helmet());

@@ -1,3 +1,4 @@
+import { IUser } from 'src/entities/users/domain/model/interface';
 import { NotificationDTO, NotificationMss } from '../../../../core/interfaces';
 import GetUsersUseCase from '../../../users/application/useCases/GetUsers';
 import NotificationFactory from '../factories/Notification';
@@ -8,14 +9,12 @@ interface Response {
 }
 
 export default class SaveNotificationMss {
-  // TODO: add return type
-  callUsers(category) {
+  callUsers(category): IUser[] {
     const getUsers = new GetUsersUseCase();
     const users = getUsers.exec({ subscription: category });
     return users;
   }
 
-  // TODO: add return type
   getNotifications(notificationMss: NotificationMss): NotificationDTO[] {
     const self = this;
     const notifications = [];
@@ -44,10 +43,10 @@ export default class SaveNotificationMss {
     return result;
   }
 
-  // TODO: add return type
   async exec(notificationMss: NotificationMss) {
     const self = this;
     const notifications = await self.getNotifications(notificationMss);
-    return self.sendNotifications(notifications);
+    const data = await self.sendNotifications(notifications);
+    return data;
   }
 }

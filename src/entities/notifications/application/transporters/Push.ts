@@ -12,6 +12,5 @@ export default class PushTransporter extends BaseTrasporter {
     /**
      * TODO: send notification by Push notification transporter
      */
-    super.logResult();
   }
 }
