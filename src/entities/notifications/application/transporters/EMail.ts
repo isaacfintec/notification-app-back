@@ -12,6 +12,5 @@ export default class EMailTransporter extends BaseTrasporter {
     /**
      * TODO: send notification by email transporter
      */
-    super.logResult();
   }
 }

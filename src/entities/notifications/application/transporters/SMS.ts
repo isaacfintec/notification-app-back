@@ -13,6 +13,5 @@ export default class SMSTransporter extends BaseTrasporter {
     /**
      * TODO: send notification by Push notification transporter
      */
-    super.logResult();
   }
 }

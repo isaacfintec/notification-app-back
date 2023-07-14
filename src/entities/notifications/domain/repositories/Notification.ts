@@ -12,12 +12,15 @@ export default class Repository {
   }
 
   private getDBStrategy(db: string) {
+    const dbSelector = db || process.env.DB;
+
     const dbByConfig = {
-      SQL: SQLRepo,
-      default: MongoRepo,
+      mongo: MongoRepo,
+      sql: SQLRepo,
+      default: SQLRepo,
     };
 
-    const DBhandle = dbByConfig[db] || dbByConfig.default;
+    const DBhandle = dbByConfig[dbSelector] || dbByConfig.default;
     return new DBhandle();
   }
 

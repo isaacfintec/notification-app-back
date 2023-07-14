@@ -40,7 +40,23 @@ Build the app for production:
 npm run build
 ```
 
-Start server:
+## Start application
+
+This repository works with memory databases connection. You can start with MongoDB or SQLite connection by passing the DB environment.
+
+Start server with mongo connection:
+
+```bash
+DB=mongo npm start
+```
+
+Start server with sql connection:
+
+```bash
+DB=sql npm start
+```
+
+Start server with default connection:
 
 ```bash
 npm start

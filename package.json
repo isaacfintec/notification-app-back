@@ -8,10 +8,12 @@
     "clean": "rimraf ./lib",
     "format": "prettier --write \"src/**/*.ts\"",
     "test:dev": "env NODE_ENV=test nodemon --watch . --ext ts --exec \"mocha -r ts-node/register src/**/*.spec.ts\"",
+    "development": "env NODE_ENV=test nodemon --watch . --ext ts lib/server.js",
     "test": "env NODE_ENV=test mocha -r ts-node/register src/**/*.spec.ts",
     "transpile": "tsc --project ./",
     "preversion": "npm-run-all format lint test",
     "build": "npm-run-all clean transpile",
+    "postinstall": "npm run build",
     "start": "node ./lib/server.js"
   },
   "repository": {
