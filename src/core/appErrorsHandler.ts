@@ -1,4 +1,4 @@
-import HTTP_STATUS_CODES from 'http-status-codes';
+import StatusCodes from 'http-status-codes';
 import { CustomError } from './helpers/CustomErrors';
 import { Request, Response } from 'express';
 
@@ -6,6 +6,8 @@ interface ErrorHandle {
   status: number;
   error: CustomError;
 }
+
+const { BAD_REQUEST, INTERNAL_SERVER_ERROR } = StatusCodes;
 
 const getResponse = (
   type: string,
@@ -16,14 +18,10 @@ const getResponse = (
   error: new CustomError(type, message),
 });
 
-const mongooseError = (type: string, message: string): ErrorHandle => {
-  /**
-   * Handle mongoose error response by type
-   */
+const dbErrorsHandler = (type: string, message: string): ErrorHandle => {
   const errorResponseHandlers = {
-    CastError: () => getResponse(type, message, HTTP_STATUS_CODES.BAD_REQUEST),
-    ValidationError: () =>
-      getResponse(type, message, HTTP_STATUS_CODES.BAD_REQUEST),
+    CastError: () => getResponse(type, message, BAD_REQUEST),
+    ValidationError: () => getResponse(type, message, BAD_REQUEST),
     default: () => getResponse(type, message),
   };
 
@@ -32,24 +30,16 @@ const mongooseError = (type: string, message: string): ErrorHandle => {
 };
 
 const evalueError = (err: Error): ErrorHandle => {
-  /**
-   * Prevent sending infrasctructure errors to the client
-   */
   const instance = err.constructor.name;
   const type = err.name;
-  const { message, code = 'Error' } = err as CustomError;
+  const { message } = err;
 
   const errorResponseHandlers = {
-    MongooseError: () => mongooseError(type, message),
-    MongoError: () => mongooseError(type, message),
-    ValidationError: () =>
-      getResponse(type, `${code}: ${message}`, HTTP_STATUS_CODES.BAD_REQUEST),
+    DatabaseError: () => dbErrorsHandler(type, message),
+    MongooseError: () => dbErrorsHandler(type, message),
+    MongoError: () => dbErrorsHandler(type, message),
     default: () =>
-      getResponse(
-        type,
-        'Error en servidor',
-        HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
-      ),
+      getResponse(type, 'INTERNAL_SERVER_ERROR', INTERNAL_SERVER_ERROR),
   };
   const handle =
     errorResponseHandlers[instance] || errorResponseHandlers.default;
@@ -58,7 +48,9 @@ const evalueError = (err: Error): ErrorHandle => {
 
 const globalErrors = (err: Error, req: Request, res: Response) => {
   const errorHandle: ErrorHandle = evalueError(err);
-  return res.status(errorHandle.status).json({ errors: [errorHandle.error] });
+  return res
+    .status(errorHandle.status || INTERNAL_SERVER_ERROR)
+    .json({ errors: [errorHandle.error] });
 };
 
 export default globalErrors;

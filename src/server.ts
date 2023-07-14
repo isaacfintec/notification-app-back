@@ -38,7 +38,7 @@ function onListening() {
   debug(`Listening on ${bind}`);
 }
 
-function onError(error): void {
+function onError(error): never {
   if (error.syscall !== 'listen') {
     throw error;
   }

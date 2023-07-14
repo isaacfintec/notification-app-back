@@ -1,5 +1,5 @@
-import MongoRepo from './MongoRepo';
-import SQLRepo from './SQLRepo';
+import MongoRepo from './MongoAdapter';
+import SQLRepo from './SQLAdapter';
 import { NotificationDTO } from '../../../../core/interfaces/Notifications';
 import { PartialSearchQuery } from '../../application/interfaces';
 import { NotificationModel } from '../model/Model';
@@ -8,10 +8,10 @@ export default class Repository {
   store: SQLRepo | MongoRepo;
 
   constructor(db?: string) {
-    this.store = this.getDBStrategy(db);
+    this.store = this.selectAdapter(db);
   }
 
-  private getDBStrategy(db: string) {
+  private selectAdapter(db: string) {
     const dbSelector = db || process.env.DB;
 
     const dbByConfig = {
