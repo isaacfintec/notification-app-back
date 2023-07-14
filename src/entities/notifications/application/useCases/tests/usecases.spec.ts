@@ -2,9 +2,9 @@ import { expect } from 'chai';
 
 import MongoDB from '../../../../../core/mongodb';
 import { NotificationModel } from '../../../domain/model/Model';
-import CreateUseCase from '../CreateOne';
-import SearchUseCase from '../Search';
-import SaveUseCase from '../CreateMany';
+import CreateLogUseCase from '../CreateLog';
+import SearchLogsUseCase from '../SearchLogs';
+import CreateFromMessageUseCase from '../CreateFromMessage';
 import { PartialSearchQuery } from '../../interfaces';
 
 describe('@Notifications/application/useCases', () => {
@@ -26,7 +26,7 @@ describe('@Notifications/application/useCases', () => {
   });
 
   it('@CreatehUseCase: should create a notification', async () => {
-    const createUseCase = new CreateUseCase();
+    const createUseCase = new CreateLogUseCase();
     const notification = await createUseCase.exec(notificationDTO);
     expect(notification).to.have.property('_id');
     expect(notification).to.have.property('type');
@@ -43,8 +43,8 @@ describe('@Notifications/application/useCases', () => {
     expect(notification.message).to.be.equal(notificationDTO.message);
   });
 
-  it('@SearchUseCase: should get a notification by query search', async () => {
-    const searchUseCase = new SearchUseCase();
+  it('@SearchLogsUseCase: should get a notification by query search', async () => {
+    const searchUseCase = new SearchLogsUseCase();
     const query = {
       category: notificationDTO.category,
     } as PartialSearchQuery;
@@ -64,9 +64,9 @@ describe('@Notifications/application/useCases', () => {
     });
   });
 
-  it('@SaveUseCase: should create many notifications from one message', async () => {
+  it('@CreateFromMessageUseCase: should create many notifications from one message', async () => {
     const { category, message } = notificationDTO;
-    const saveUseCase = new SaveUseCase();
+    const saveUseCase = new CreateFromMessageUseCase();
     const notifications = await saveUseCase.exec({ category, message });
     notifications.map((n) => {
       const notification = n as { status: string; value: NotificationModel };

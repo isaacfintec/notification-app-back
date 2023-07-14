@@ -2,18 +2,14 @@ import { NotificationDTO } from '../../../../core/interfaces';
 import { NotificationModel } from '../../domain/model/Model';
 import Repository from '../../domain/repositories/Notification';
 
-export default class CreateNotificationUseCase {
-  async create(
-    notificationDTO: NotificationDTO,
-  ): Promise<NotificationModel> | never {
+export default class CreateLogUseCase {
+  async create(notificationDTO: NotificationDTO): Promise<NotificationModel> {
     const repository = new Repository();
     const notification = await repository.save(notificationDTO);
     return notification;
   }
 
-  async exec(
-    notificationDTO: NotificationDTO,
-  ): Promise<NotificationModel> | never {
+  async exec(notificationDTO: NotificationDTO): Promise<NotificationModel> {
     const self = this;
     const norificationLogs = await self.create(notificationDTO);
     /**

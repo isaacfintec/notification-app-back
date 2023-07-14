@@ -1,10 +1,7 @@
 import MongoSchema from '../model/MongoSchema';
 import { NotificationDTO } from '../../../../core/interfaces';
 import { NotificationMongoModel } from '../model/Model';
-import {
-  PartialSearchQuery,
-  SearchQuery,
-} from '../../application/interfaces/index';
+import { PartialSearchQuery } from '../../application/interfaces/index';
 
 export default class MongoRepository {
   save(notificationDTO: NotificationDTO): Promise<NotificationMongoModel> {

@@ -1,6 +1,6 @@
 import { NotificationDTO } from '../../../../core/interfaces';
 import { NotificationModel } from '../../domain/model/Model';
-import CreateNotificationUseCase from '../useCases/CreateOne';
+import CreateNotificationUseCase from '../useCases/CreateLog';
 
 export default abstract class BaseTrasporter {
   props: NotificationDTO;
@@ -11,7 +11,7 @@ export default abstract class BaseTrasporter {
 
   abstract sendNotification();
 
-  async logResult(): Promise<NotificationModel> | never {
+  async logResult(): Promise<NotificationModel> {
     const self = this;
     const createNotificationUseCase = new CreateNotificationUseCase();
     const notificationLog = await createNotificationUseCase.exec(self.props);

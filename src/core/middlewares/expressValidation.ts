@@ -2,22 +2,15 @@ import { Request, Response, NextFunction } from 'express';
 import { validationResult, ValidationError } from 'express-validator';
 import HTTP_CODE from 'http-status-codes';
 
-class InvalidParameterError extends Error {
-  code: string;
+import { CustomError } from '../helpers';
 
-  constructor(name) {
-    super();
-    this.code = 'INVALID_PARAMETER';
-    this.message = `Parameter "${name}" is invalid`;
-  }
-}
-
-const formatErrors = (errors: ValidationError[]) => {
-  const newErros = [...errors].map((error) => {
+const errorFormatter = (errors: ValidationError[]) => {
+  const code = 'INVALID_PARAMETER';
+  const newErros = errors.map((error) => {
     const { param, value } = error;
     const lastPram = param.split('.').pop();
     const message = `${lastPram}: ${value}`;
-    return new InvalidParameterError(message);
+    return new CustomError(code, message);
   });
   return newErros;
 };
@@ -29,8 +22,8 @@ export const validationMiddleware = (
 ) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const formatedErrors = formatErrors(errors.array());
-    return res.status(HTTP_CODE.BAD_REQUEST).json({ errors: formatedErrors });
+    const formattedErrors = errorFormatter(errors.array());
+    return res.status(HTTP_CODE.BAD_REQUEST).json({ errors: formattedErrors });
   }
   return next();
 };

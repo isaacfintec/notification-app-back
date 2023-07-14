@@ -12,4 +12,4 @@ export type TExpressHandler = (
   req: Request,
   reply: Response,
   next: NextFunction,
-) => void | never;
+) => void;
