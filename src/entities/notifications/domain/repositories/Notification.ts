@@ -17,7 +17,7 @@ export default class Repository {
     const dbByConfig = {
       mongo: MongoRepo,
       sql: SQLRepo,
-      default: SQLRepo,
+      default: MongoRepo,
     };
 
     const DBhandle = dbByConfig[dbSelector] || dbByConfig.default;

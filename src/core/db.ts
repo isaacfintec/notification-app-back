@@ -7,7 +7,7 @@ const DB = process.env.DB;
 const DBhandlers = {
   mongo: Mongo,
   sql: SQL,
-  default: SQL,
+  default: Mongo,
 };
 
 const DBhandle = DBhandlers[DB] || DBhandlers.default;
