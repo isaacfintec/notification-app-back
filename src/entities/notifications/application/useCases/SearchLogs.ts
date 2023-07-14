@@ -3,12 +3,12 @@ import { PartialSearchQuery } from '../interfaces';
 import Repository from '../../domain/repositories/Notification';
 
 export default class SearchNotificationUseCase {
-  search(query: PartialSearchQuery): Promise<NotificationModel[]> | never {
+  search(query: PartialSearchQuery): Promise<NotificationModel[]> {
     const repository = new Repository();
     return repository.search(query);
   }
 
-  async exec(query: PartialSearchQuery): Promise<NotificationModel[]> | never {
+  async exec(query: PartialSearchQuery): Promise<NotificationModel[]> {
     const self = this;
     const notifications = await self.search(query);
     /**

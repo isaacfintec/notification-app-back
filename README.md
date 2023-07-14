@@ -42,7 +42,7 @@ npm run build
 
 ## Start application
 
-This repository works with memory databases connection. You can start with MongoDB or SQLite connection by passing the DB environment.
+This repository works with a memory database connection. You can start with MongoDB or SQLite connection by passing the DB environment.
 
 Start server with mongo connection:
 
@@ -50,7 +50,7 @@ Start server with mongo connection:
 DB=mongo npm start
 ```
 
-Start server with sql connection:
+Start server with sqlite connection:
 
 ```bash
 DB=sql npm start

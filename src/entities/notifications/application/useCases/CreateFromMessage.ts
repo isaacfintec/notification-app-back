@@ -8,7 +8,7 @@ interface Response {
   message: string;
 }
 
-export default class SaveNotificationMss {
+export default class CreateFromMessage {
   callUsers(category): IUser[] {
     const getUsers = new GetUsersUseCase();
     const users = getUsers.exec({ subscription: category });
