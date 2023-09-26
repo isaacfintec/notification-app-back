@@ -17,7 +17,11 @@ const logType = isProductionEnvironment() ? 'combined' : 'dev';
 
 app.use(logger(logType));
 app.use(helmet());
-app.use(cors(corsOptionsDelegate));
+app.use(cors({
+  origins: ['http://localhost:3000', 'http://localhost:8000'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedMethods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
